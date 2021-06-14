@@ -1,16 +1,4 @@
 # login_dice
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![image](https://user-images.githubusercontent.com/68521263/121880385-e8159500-cd48-11eb-953f-f52ffd44ebd3.png)
+![image](https://user-images.githubusercontent.com/68521263/121880432-f499ed80-cd48-11eb-9295-e14c8c4bdf7d.png)
