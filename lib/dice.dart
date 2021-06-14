@@ -1,8 +1,18 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
-class Dice extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+class Dice extends StatefulWidget {
   const Dice({Key? key}) : super(key: key);
 
+  @override
+  _DiceState createState() => _DiceState();
+}
+
+class _DiceState extends State<Dice> {
+  int leftDice = 1;
+  int rightDice = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,9 +29,9 @@ class Dice extends StatelessWidget {
               padding: EdgeInsets.all(32.0),
               child: Row(
                 children: [
-                  Expanded(child: Image.asset("image/dice1.png")),
+                  Expanded(child: Image.asset("image/dice$leftDice.png")),
                   SizedBox(width: 20.0),
-                  Expanded(child: Image.asset("image/dice2.png")),
+                  Expanded(child: Image.asset("image/dice$rightDice.png")),
                 ],
               ),
             ),
@@ -36,7 +46,13 @@ class Dice extends StatelessWidget {
                   size: 50.0,
                 ),
                 color: Colors.orangeAccent,
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    leftDice = Random().nextInt(6) + 1;
+                    rightDice = Random().nextInt(6) + 1;
+                  });
+                  showToast("Left dice: {$leftDice}, Right dice: {$rightDice}");
+                },
               ),
             ),
           ],
@@ -44,4 +60,13 @@ class Dice extends StatelessWidget {
       ),
     );
   }
+}
+
+void showToast(String message) {
+  Fluttertoast.showToast(
+    msg: message,
+    backgroundColor: Colors.white,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
+  );
 }
