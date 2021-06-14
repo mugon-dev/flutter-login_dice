@@ -35,6 +35,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.redAccent,
         title: Text('Log in'),
         centerTitle: true,
         leading: IconButton(
@@ -45,84 +46,90 @@ class _LoginState extends State<Login> {
       ),
       body: Builder(
         builder: (context) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(padding: EdgeInsets.only(top: 50)),
-                Center(
-                  child: Image(
-                    image: AssetImage("image/chef.gif"),
-                    width: 170.0,
-                    height: 190.0,
+          return GestureDetector(
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(padding: EdgeInsets.only(top: 50)),
+                  Center(
+                    child: Image(
+                      image: AssetImage("image/chef.gif"),
+                      width: 170.0,
+                      height: 190.0,
+                    ),
                   ),
-                ),
-                Form(
-                  child: Theme(
-                    data: ThemeData(
-                      primaryColor: Colors.teal,
-                      inputDecorationTheme: InputDecorationTheme(
-                        labelStyle: TextStyle(
-                          color: Colors.teal,
-                          fontSize: 15.0,
+                  Form(
+                    child: Theme(
+                      data: ThemeData(
+                        primaryColor: Colors.teal,
+                        inputDecorationTheme: InputDecorationTheme(
+                          labelStyle: TextStyle(
+                            color: Colors.teal,
+                            fontSize: 15.0,
+                          ),
+                        ),
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.all(40.0),
+                        child: Column(
+                          children: [
+                            TextField(
+                              autofocus: true,
+                              controller: controller,
+                              decoration: InputDecoration(
+                                labelText: 'Enter "dice"',
+                              ),
+                              keyboardType: TextInputType.emailAddress,
+                            ),
+                            TextField(
+                              controller: controller2,
+                              decoration: InputDecoration(
+                                labelText: 'Enter Password',
+                              ),
+                              keyboardType: TextInputType.text,
+                              // text ** 처리
+                              obscureText: true,
+                            ),
+                            SizedBox(height: 40.0),
+                            ButtonTheme(
+                              minWidth: 100.0,
+                              height: 50.0,
+                              child: FlatButton(
+                                color: Colors.orangeAccent,
+                                child: Icon(
+                                  Icons.arrow_forward,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  if (controller.text == 'dice' &&
+                                      controller2.text == '1234') {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                Dice()));
+                                  } else if (controller.text == 'dice' &&
+                                      controller2.text != '1234') {
+                                    showSnackBar2(context);
+                                  } else if (controller.text != 'dice' &&
+                                      controller2.text == '1234') {
+                                    showSnackBar3(context);
+                                  } else {
+                                    showSnackBar(context);
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    child: Container(
-                      padding: EdgeInsets.all(40.0),
-                      child: Column(
-                        children: [
-                          TextField(
-                            controller: controller,
-                            decoration: InputDecoration(
-                              labelText: 'Enter "dice"',
-                            ),
-                            keyboardType: TextInputType.emailAddress,
-                          ),
-                          TextField(
-                            controller: controller2,
-                            decoration: InputDecoration(
-                              labelText: 'Enter Password',
-                            ),
-                            keyboardType: TextInputType.text,
-                            // text ** 처리
-                            obscureText: true,
-                          ),
-                          SizedBox(height: 40.0),
-                          ButtonTheme(
-                            minWidth: 100.0,
-                            height: 50.0,
-                            child: FlatButton(
-                              color: Colors.orangeAccent,
-                              child: Icon(
-                                Icons.arrow_forward,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {
-                                if (controller.text == 'dice' &&
-                                    controller2.text == '1234') {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              Dice()));
-                                } else if (controller.text == 'dice' &&
-                                    controller2.text != '1234') {
-                                  showSnackBar2(context);
-                                } else if (controller.text != 'dice' &&
-                                    controller2.text == '1234') {
-                                  showSnackBar3(context);
-                                } else {
-                                  showSnackBar(context);
-                                }
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
